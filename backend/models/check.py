@@ -1,9 +1,10 @@
 from backend.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Boolean, String
+from sqlalchemy import Boolean, String, DateTime, func
 from uuid import UUID as PyUUID
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+from datetime import datetime
 
 
 class NumberCheck(Base):
@@ -17,3 +18,4 @@ class NumberCheck(Base):
     carrier: Mapped[str] = mapped_column(String(20), nullable=True)
     type: Mapped[str] = mapped_column(String(10), nullable=True)
     local_format: Mapped[str] = mapped_column(String(20), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
